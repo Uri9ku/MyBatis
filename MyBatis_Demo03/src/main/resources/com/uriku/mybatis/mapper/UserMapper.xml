@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uriku.mybatis.mapper.UserMapper">
+    <select id="getAllUserOld" resultType="User">
+        <!-- select uid,user_name userName,age,email,Did from t_user -->
+        select * from t_user
+    </select>
+
+    <!--
+        resultMap：设置自定义映射关系
+        id：唯一标识，不能重复
+        type：设置映射关系中的实体类类型
+        子标签：
+          id：设置主键的映射关系
+          result：设置普通字段的映射关系
+        属性：
+          property：设置映射关系的属性名，必须是 type 属性类所设置的实体类类型中的属性名
+          column：设置映射关系中的字段名，必须是 SQL 语句查询出的字段名
+    -->
+    <resultMap id="userResultMap" type="User">
+        <!-- 主键的映射关系-->
+        <id property="uid" column="uid"></id>
+        <!-- 普通字段的映射关系 -->
+        <result property="userName" column="user_name"></result>
+        <result property="age" column="age"></result>
+        <result property="email" column="email"></result>
+    </resultMap>
+
+    <select id="getAllUser" resultMap="userResultMap">
+        <!-- select uid,user_name userName,age,email,Did from t_user -->
+        select * from t_user
+    </select>
+
+    <!-- 左外连接查询 -->
+    <select id="getUserAndDept" resultMap="">
+        select * from t_user join t_dept on t_dept.did where t_use.uid = #{uid}
+    </select>
+</mapper>

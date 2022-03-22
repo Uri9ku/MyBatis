@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uriku.mybatis.mapper.SQLMapper">
+    <select id="getActorByLike" resultType="Actor">
+        select * from actor where name like '%${name}%'
+        <!--select * from actor where name like concat('%',#{name},'%') -->
+        <!-- select * from actor where name like "%"#{name}"%" -->
+    </select>
+
+    <delete id="DeleteMore">
+        delete from actor where id in(${ids})
+    </delete>
+
+    <select id="getActorByTableName" resultType="Actor">
+        select * from ${tableName}
+    </select>
+
+    <!--
+        useGeneratedKeys:设置当前标签中的 SQL 使用了自增的主键
+        keyProperty:将自增的主键的值给传输到映射文件中的某个属性
+     -->
+    <insert id="insertActor" useGeneratedKeys="true" keyProperty="id">
+        insert into actor values (#{name},#{sex},#{borndate},#{phone})
+    </insert>
+</mapper>

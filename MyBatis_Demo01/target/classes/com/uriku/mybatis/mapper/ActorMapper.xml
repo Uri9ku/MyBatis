@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uriku.mybatis.mapper.ActorMapper">
+
+    <!--int insertActor();-->
+    <insert id="insertActor">
+        insert into actor values('Eyreo','男','2001-11-22','123456')
+    </insert>
+
+    <!-- void updateActor(); -->
+    <update id="updateActor">
+        update actor set name = 'Yuer' where id = 13
+    </update>
+
+    <!-- void deleteActor(); -->
+    <delete id="deleteActor">
+        delete from actor where id = 14
+    </delete>
+
+    <!-- Actor getActorById(); -->
+    <!--
+        查询功能的标签必须设置 resultType 或 resultMap
+        resultSet：设置默认的映射关系
+        resultMap：设置自定义的映射关系（字段名和属性名不一样，一对多或多对一）
+    -->
+    <!-- resultType：结果类型 -->
+    <!-- resultMap：结果映射 -->
+    <select id="getActorById" resultType="Actor">
+        select * from actor where id = 2
+    </select>
+
+    <!-- List<Actor> getAllActor(); -->
+    <select id="getAllActor" resultType="Actor">
+        select * from actor
+    </select>
+</mapper>

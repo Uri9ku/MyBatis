@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uriku.mybatis.mapper.SelectMapper">
+    <select id="getActorById" resultType="Actor">
+        select * from actor where id = #{id}
+    </select>
+
+    <select id="getAllActor" resultType="Actor">
+        select * from actor
+    </select>
+
+    <!--Int int,MyBatis 类型别名大小写通用 -->
+    <select id="getCount" resultType="java.lang.Integer">
+        select count(*) from actor
+    </select>
+
+    <select id="getActorByIdToMap" resultType="Map">
+        select * from actor where id = #{id}
+    </select>
+
+    <select id="getAllActorToMap" resultType="Map">
+        select * from actor
+    </select>
+
+    <select id="getAllActorToMapKey" resultType="Map">
+        select * from actor
+    </select>
+</mapper>

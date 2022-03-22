@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uriku.mybatis.mapper.ParameterMapper">
+    <select id="getAllActor" resultType="Actor">
+        select * from actor
+    </select>
+
+    <!-- 单个参数 -->
+    <select id="getActorByActorName" resultType="Actor">
+        select * from actor where name = '${actorName}'
+        <!-- select * from actor where name = #{actorName} -->
+    </select>
+
+    <!-- 多个参数 MyBatis 自动设置 -->
+    <select id="checkLogin" resultType="Actor">
+        <!-- select * from actor where name = #{arg0} and phone = #{arg1} -->
+        <!-- select * from actor where name = #{param1} and phone = #{param2} -->
+        <!-- select * from actor where name = #{arg0} and phone = #{param2} -->
+        select * from actor where name = '${arg0}' and phone = #{param2}
+    </select>
+
+    <!-- 多个参数 MyBatis 手动设置，麻烦 -->
+    <select id="checkLogin1" resultType="Actor">
+        select * from actor where name = '${name}' and phone = #{phone}
+    </select>
+
+    <!-- 多个参数 MyBatis 对象 -->
+    <insert id="insertActor">
+        insert into actor values (#{id},#{name},#{sex},#{borndate},#{phone})
+    </insert>
+
+    <!-- 多个参数 MyBatis 注解设置，方式二三的结合 -->
+    <select id="checkLoginByParam" resultType="Actor">
+        select * from actor where name = '${name}' and phone = #{phone}
+    </select>
+</mapper>
